@@ -7,6 +7,7 @@ import configparser
 from terminaltables import SingleTable
 
 smms_endpoint = "https://sm.ms/api/v2/upload/"
+smms_profile_endpoint = "https://sm.ms/api/v2/profile/"
 smms_upload_history_endpoint = "https://sm.ms/api/v2/upload_history/"
 
 """
@@ -31,6 +32,33 @@ def upload(image_path, smms_api_token=None):
         return draw_upload_status_table(json_content)
     else:
         return "Something went wrong, info as follows: " + json_content['message']
+
+"""
+Get user profile.
+"""
+def get_profile(smms_api_token):
+    headers = {
+        'Authorization': smms_api_token
+    }
+    r = requests.post(smms_profile_endpoint, headers=headers)
+    json_content = json.loads(r.text)
+    return draw_profile_table(json_content)
+
+"""
+Visualize the user history JSON response by SM.MS.
+"""
+def draw_profile_table(json_response):
+    j = json_response
+    data = [
+        ['username', j['data']['username']],
+        ['Role', j['data']['role']],
+        ['Group Expire Time', j['data']['group_expire']],
+        ['Disk Usage', j['data']['disk_usage']],
+        ['Disk Limit', j['data']['disk_limit']],
+    ]
+    table_instance = SingleTable(data, 'SM.MS User Profile')
+    table_instance.inner_row_border = True
+    return table_instance.table
 
 
 """
@@ -111,9 +139,16 @@ def exe_main():
             print(t)
         except:
             sys.exit("Missing API Token in '~/.smms'")
+    elif sys.argv[1] == "profile":
+        try:
+            config.read(config_path)
+            smms_api_token = config['sm.ms']['api_token']
+            t = get_profile(smms_api_token)
+            print(t)
+        except:
+            sys.exit("Missing API Token in '~/.smms'")
     else:
         send_file = sys.argv[1]
-
         try:
             config.read(config_path)
             smms_api_token = config['sm.ms']['api_token']

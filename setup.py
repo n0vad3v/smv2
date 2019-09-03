@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="smv2",
-    version="0.0.4",
+    version="0.0.5",
     author="Nova Kwok",
     author_email="noc@nova.moe",
     description="The CLI Tool for SM.MS, based on API v2.",

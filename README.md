@@ -1,16 +1,36 @@
 # SMv2
 
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
 基于 SM.MS 图床 API v2 的小程序。
 
 ## 安装方法
 
-先安装我啦~
+直接用 pip 安装我啦~
 
 ```bash
 $ pip3 install smv2
 ```
 
 ## 使用方法
+
+### 查看用户基本信息
+
+在指定了 API Token 的情况下使用 `smv2 profile` 查看当前用户基本信息，例如:
+
+```
+┌SM.MS User Profile─┬────────────────────────┐
+│ username          │ noc@nova.moe           │
+├───────────────────┼────────────────────────┤
+│ Role              │ user                   │
+├───────────────────┼────────────────────────┤
+│ Group Expire Time │ 2020-02-18             │
+├───────────────────┼────────────────────────┤
+│ Disk Usage        │ 2.12 MB                │
+├───────────────────┼────────────────────────┤
+│ Disk Limit        │ 5.00 GB                │
+└───────────────────┴────────────────────────┘
+```
 
 ### 上传图片
 
@@ -69,9 +89,3 @@ Upload with Token:1A0G******IhBV
 │ https://i.loli.net/2019/02/18/Q123f2TWhtnk1FR.jpg │ https://sm.ms/delete/8Ymbq218218XlPIDg4ReE2rcTi │
 └───────────────────────────────────────────────────┴─────────────────────────────────────────────────┘
 ```
-
-## TODOs
-
-- [x] 支持基于 API Token 的图片上传
-- [x] 获得用户历史上传记录
-- [ ] 在终端下显示图片
