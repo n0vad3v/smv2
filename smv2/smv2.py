@@ -68,7 +68,7 @@ def get_upload_history(smms_api_token):
     headers = {
         'Authorization': smms_api_token
     }
-    r = requests.post(smms_upload_history_endpoint, headers=headers)
+    r = requests.get(smms_upload_history_endpoint, headers=headers)
     json_content = json.loads(r.text)
     return draw_user_history_table(json_content)
 
